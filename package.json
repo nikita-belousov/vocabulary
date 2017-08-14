@@ -1,0 +1,26 @@
+{
+  "name": "vocabulary-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bulma": "^0.5.1",
+    "font-awesome": "^4.7.0",
+    "immutable": "^3.8.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "0.9.5",
+    "shortid": "^2.2.8"
+  },
+  "devDependencies": {
+    "redux": "^3.7.2",
+    "redux-immutable": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
