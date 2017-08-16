@@ -19,7 +19,6 @@ export function shuffleArray(originalArray) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   while (0 !== currentIndex) {
-
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
@@ -33,6 +32,6 @@ export function shuffleArray(originalArray) {
 
 export function getStringBase(string) {
   return string
-    .replace(' ', '')
+    .replace(/\s/g, '')
     .toLowerCase()
 }

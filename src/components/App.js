@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom';
+} from 'react-router-dom'
 
-import Translator from './Translator';
-import ListManager from './ListManager';
-import TestManager from './TestManager';
+import { Translator } from './translatorComponents'
+import { ListManager } from './listsComponents'
+import { TestManager } from './testComponents'
 
-const Vocabulary = () => (
+const App = () => (
     <Router>
       <div style={{
         width: '600px',
@@ -28,6 +28,6 @@ const Vocabulary = () => (
         <Route path="/test" component={TestManager}/>
       </div>
     </Router>
-);
+)
 
-export default Vocabulary;
+export default App
