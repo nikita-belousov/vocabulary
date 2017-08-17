@@ -145,6 +145,7 @@ let Translator = class extends Component {
         data: data
           .set('result', fromJS(res))
           .set('isLoading', false)
+          .set('isAdded', false)
       })))
   }
 
