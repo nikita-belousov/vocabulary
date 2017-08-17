@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { fromJS, toJS } from 'immutable'
+import { List, fromJS, toJS } from 'immutable'
 import { connect } from 'react-redux'
 
 import * as actions from './../../actions'
@@ -28,7 +28,8 @@ let Translator = class extends Component {
       isAdding: false,
       isAdded: false,
       addForm: {
-        list: this.props.lists.get(0),
+        listId: this.props.lists.getIn([0, 'id']),
+        listName: this.props.lists.getIn([0, 'name']),
         checkedTranslations: []
       },
       result: null,
@@ -77,7 +78,7 @@ let Translator = class extends Component {
 
     if (this.isAddFormValid(data.get('addForm'))) {
       this.addWordToList(
-        data.getIn(['addForm', 'list', 'id']),
+        data.getIn(['addForm', 'listId']),
         data.get('result'),
         data.getIn(['addForm', 'checkedTranslations'])
       )
@@ -95,6 +96,7 @@ let Translator = class extends Component {
 
     this.setState(({ data }) => ({
       data: data
+        .setIn(['addForm', 'checkedTranslations'], List())
         .set('isAdding', false)
         .set('isAdded', true)
     }))
@@ -162,7 +164,7 @@ let Translator = class extends Component {
         />
 
         {data.get('isAdded')
-          ? <AddedToList listName={data.getIn(['addForm', 'list', 'name'])} />
+          ? <AddedToList listName={data.getIn(['addForm', 'listName'])} />
           : <AddWordToList
               isAdding={data.get('isAdding')}
               onAdd={this.prepareAdding}
