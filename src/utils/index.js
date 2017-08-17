@@ -35,3 +35,26 @@ export function getStringBase(string) {
     .replace(/\s/g, '')
     .toLowerCase()
 }
+
+export function areArraysEqual(arrayOne, arrayTwo) {
+  if (arrayOne.length !== arrayTwo.length)
+    return false
+
+  let equal = true
+  const copy = arrayTwo.slice()
+
+  arrayOne.forEach(item => {
+    let found = false
+
+    copy.forEach((copyItem, index) => {
+      if (item === copyItem) {
+        copy.splice(index, 1)
+        found = true
+      }
+    })
+
+    if (!found) equal = false
+  })
+
+  return equal
+}

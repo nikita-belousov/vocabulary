@@ -42,6 +42,7 @@ let CreateTestForm = class extends Component {
   }
 
   handleOptionsChange = (e) => {
+    const state = this.state.data
     const { name, type, value, checked } = e.target
 
     const setValue = type === 'checkbox' ? checked : value
@@ -55,8 +56,8 @@ let CreateTestForm = class extends Component {
       }
     })
 
-    const translationsRequired = this.state.data
-      .getIn(['options', 'translationsRequired'])
+    const requiredTranslations = this.state.data
+      .getIn(['options', 'requiredTranslations'])
     let newRequired
 
     if ((name === 'translateMode')) {
@@ -68,8 +69,19 @@ let CreateTestForm = class extends Component {
 
       this.setState(prevState => ({
         data: prevState.data.setIn(
-          ['options', 'translationsRequired'],
+          ['options', 'requiredTranslations'],
           newRequired
+        )
+      }))
+    }
+
+    if ((name === 'variants')
+         && (state.getIn(['options', 'translateMode']) === 'fromOriginal')
+         && checked) {
+      this.setState(prevState => ({
+        data: prevState.data.setIn(
+          ['options', 'requiredTranslations'],
+          'any'
         )
       }))
     }

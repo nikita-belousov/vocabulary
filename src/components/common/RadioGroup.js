@@ -11,7 +11,7 @@ const RadioGroup = (props) => {
           key={option.value}
           label={option.title}
           value={option.value}
-          checked={option.value === props.value}
+          checked={props.value ? option.value === props.value : undefined}
           {...restProps}
         />
       )}

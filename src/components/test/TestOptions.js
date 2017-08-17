@@ -17,8 +17,7 @@ const SHOW_MODES = [
 
 const TRANSLATE_MODES = [
   { value: 'fromOriginal', title: 'from original' },
-  { value: 'toOriginal', title: 'to original' },
-  { value: 'both', title: 'both' }
+  { value: 'toOriginal', title: 'to original' }
 ]
 
 const REQUIRED_TRANSLATIONS = [
@@ -57,17 +56,16 @@ class TestOptions extends Component {
             />
           </TestOption>
 
-          {values.get('translationsRequired')
-            && (
-            <TestOption title="Required translations:">
-              <RadioGroup
-                name="requiredTranslations"
-                options={REQUIRED_TRANSLATIONS}
-                value={values.get('requiredTranslations')}
-                onChange={onChange}
-              />
-            </TestOption>
-          )}
+          {values.get('requiredTranslations')
+            && <TestOption title="Required translations:">
+                 <RadioGroup
+                   name="requiredTranslations"
+                   options={REQUIRED_TRANSLATIONS}
+                   value={values.get('requiredTranslations')}
+                   onChange={onChange}
+                   disabled={values.get('variants')}
+                 />
+               </TestOption>}
 
           <TestOption>
             <Checkbox
@@ -78,14 +76,14 @@ class TestOptions extends Component {
             />
           </TestOption>
 
-          <TestOption>
+          {/* <TestOption>
             <Checkbox
               name="involveLearnt"
               checked={values.get('involveLearnt')}
               onChange={onChange}
               label="learnt words"
             />
-          </TestOption>
+          </TestOption> */}
 
           <Button onClick={onSubmit}>
             Start test

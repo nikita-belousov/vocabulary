@@ -38,12 +38,13 @@ let Test = class extends Component {
           id={id}
           text={currentTask.get('text')}
           inputValue={currentTask.get('userAnswer')}
+          variants={currentTask.get('variants')}
           onInputChange={this.handleInputChange}
         />
 
          <Button
            onClick={isLast ? this.onTestFinish : this.onNextTask}
-          >
+         >
            {isLast ? 'Finish' : 'Next'}
          </Button>
       </div>
@@ -62,6 +63,7 @@ let Test = class extends Component {
               id={index}
               text={task.get('text')}
               inputValue={task.get('userAnswer')}
+              variants={task.get('variants')}
               onInputChange={this.handleInputChange}
             />
           )
@@ -79,7 +81,7 @@ let Test = class extends Component {
     const tasks = test.get('tasks')
     const currentTask = test.get('currentTask')
 
-    return test.get('showMode') === 'all'
+    return test.getIn(['options', 'showMode']) === 'all'
       ? this.renderAllTasks(tasks)
       : this.renderOneTask(tasks, currentTask)
   }

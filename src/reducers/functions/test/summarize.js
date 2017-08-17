@@ -23,7 +23,9 @@ function setLearnt(state, correctWords) {
 
 function summarize(state) {
   const tasks = state.getIn(['test', 'tasks'])
-  const checked = checkAnswers(tasks)
+  const options = state.getIn(['test', 'options'])
+
+  const checked = checkAnswers(tasks, options)
 
   const correctWords = checked.reduce((res, task) => {
       if (task.get('isCorrect')) {

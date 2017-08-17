@@ -12,7 +12,7 @@ function createTest(state, neededLists, options) {
 
   return state.set('test', fromJS({
     state: 'passing',
-    showMode: options.showMode,
+    options: { ...options },
     currentTask: (options.showMode === 'all' ? null : 0),
     tasks
   }))
