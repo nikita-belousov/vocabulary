@@ -3,6 +3,10 @@ import { fromJS, toJS } from 'immutable'
 import shortid from 'shortid'
 
 import {
+  Button
+} from './../commonComponents'
+
+import {
   Word,
   AddWords
 } from './../listsComponents'
@@ -89,12 +93,12 @@ class List extends Component {
           </i>
 
           {words.length > 0 && (
-            <button
+            <Button
               style={{ float: 'right' }}
               onClick={this.toggleOpen}
             >
               {isOpen ? 'close' : 'open'}
-            </button>
+            </Button>
           ) }
         </div>
 

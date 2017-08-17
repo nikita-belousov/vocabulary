@@ -45,6 +45,11 @@ function app(state, action) {
       return createTest(state, action.neededLists, action.options)
     case 'UPDATE_TASK_INPUT':
       return updateTaskInput(state, action.taskId, action.value)
+    case 'NEXT_TASK':
+      return state.updateIn(
+        ['test', 'currentTask'],
+        currentTask => currentTask + 1
+      )
     case 'SUMMARIZE':
       return summarize(state)
     case 'RESET_TEST_STATE':

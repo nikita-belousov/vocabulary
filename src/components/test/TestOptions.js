@@ -11,8 +11,8 @@ import {
 } from './../testComponents'
 
 const SHOW_MODES = [
-  { value: 'byOne', title: 'by one word' },
-  { value: 'all', title: 'all words' }
+  { value: 'byOne', title: 'by one task' },
+  { value: 'all', title: 'all tasks' }
 ]
 
 const TRANSLATE_MODES = [
@@ -21,9 +21,9 @@ const TRANSLATE_MODES = [
   { value: 'both', title: 'both' }
 ]
 
-const TRANSLATIONS_REQUIRED = [
-  { value: 'any', title: 'Any' },
-  { value: 'all', title: 'All' }
+const REQUIRED_TRANSLATIONS = [
+  { value: 'any', title: 'any' },
+  { value: 'all', title: 'all' }
 ]
 
 class TestOptions extends Component {
@@ -38,7 +38,7 @@ class TestOptions extends Component {
     return (
       <fieldset>
         <legend>{title}</legend>
-        
+
           <TestOption title="Show mode:">
             <RadioGroup
               name="showMode"
@@ -61,9 +61,9 @@ class TestOptions extends Component {
             && (
             <TestOption title="Required translations:">
               <RadioGroup
-                name="translationsRequired"
-                options={TRANSLATIONS_REQUIRED}
-                value={values.get('translationsRequired')}
+                name="requiredTranslations"
+                options={REQUIRED_TRANSLATIONS}
+                value={values.get('requiredTranslations')}
                 onChange={onChange}
               />
             </TestOption>
@@ -74,7 +74,16 @@ class TestOptions extends Component {
               name="variants"
               checked={values.get('variants')}
               onChange={onChange}
-              label="with variants"
+              label="variants"
+            />
+          </TestOption>
+
+          <TestOption>
+            <Checkbox
+              name="involveLearnt"
+              checked={values.get('involveLearnt')}
+              onChange={onChange}
+              label="learnt words"
             />
           </TestOption>
 

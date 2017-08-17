@@ -16,8 +16,9 @@ let CreateTestForm = class extends Component {
       options: {
         showMode: 'byOne',
         translateMode: 'fromOriginal',
+        requiredTranslations: 'any',
         variants: false,
-        translationsRequired: 'any'
+        involveLearnt: false,
       }
     })
   }
@@ -27,7 +28,7 @@ let CreateTestForm = class extends Component {
     const options = this.state.data.get('options')
 
     this.props.dispatch(
-      actions.createTest(neededLists, options)
+      actions.createTest(neededLists, options.toJS())
     )
   }
 
@@ -41,10 +42,9 @@ let CreateTestForm = class extends Component {
   }
 
   handleOptionsChange = (e) => {
-    const { name, value, checked } = e.target
+    const { name, type, value, checked } = e.target
 
-    const setValue = name === 'variants' ?
-      checked : value
+    const setValue = type === 'checkbox' ? checked : value
 
     this.setState(prevState => {
       return {
@@ -75,6 +75,13 @@ let CreateTestForm = class extends Component {
     }
   }
 
+  isNoListsWithWords(lists) {
+    for (let list of lists) {
+      if (list.get('words').size > 0) return false
+    }
+
+    return true
+  }
 
   renderForm() {
     const neededLists = this.state.data.get('neededLists')
@@ -104,14 +111,6 @@ let CreateTestForm = class extends Component {
         <p>First create some lists with words...</p>
       </div>
     )
-  }
-
-  isNoListsWithWords(lists) {
-    for (let list of lists) {
-      if (list.get('words').size > 0) return false
-    }
-
-    return true
   }
 
   render() {

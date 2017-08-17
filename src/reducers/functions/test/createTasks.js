@@ -1,3 +1,5 @@
+import { List } from 'immutable'
+
 import {
   createTask
 } from './../testFunctions'
@@ -9,7 +11,7 @@ function createTasks(state, lists, options) {
       .find(list => list.get('id') === listId)
       .get('words')
       .forEach(word => {
-        const task = createTask(listId, word, options)
+        const task = createTask(listId, word.toJS(), options)
         res.push(task)
       })
 

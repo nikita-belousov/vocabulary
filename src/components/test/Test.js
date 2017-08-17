@@ -20,15 +20,37 @@ let Test = class extends Component {
     )
   }
 
+  onNextTask = () => {
+    this.props.dispatch(actions.nextTask())
+  }
+
   onTestFinish = () => {
-    this.props.dispatch(
-      actions.summarize()
+    this.props.dispatch(actions.summarize())
+  }
+
+  renderOneTask(tasks, id) {
+    const currentTask = tasks.get(id)
+    const isLast = id === tasks.size - 1
+
+    return (
+      <div>
+        <Task
+          id={id}
+          text={currentTask.get('text')}
+          inputValue={currentTask.get('userAnswer')}
+          onInputChange={this.handleInputChange}
+        />
+
+         <Button
+           onClick={isLast ? this.onTestFinish : this.onNextTask}
+          >
+           {isLast ? 'Finish' : 'Next'}
+         </Button>
+      </div>
     )
   }
 
-  render() {
-    const tasks = this.props.test.get('tasks')
-
+  renderAllTasks(tasks) {
     return (
       <div>
         {tasks.map(task => {
@@ -50,6 +72,16 @@ let Test = class extends Component {
         </Button>
       </div>
     )
+  }
+
+  render() {
+    const { test } = this.props
+    const tasks = test.get('tasks')
+    const currentTask = test.get('currentTask')
+
+    return test.get('showMode') === 'all'
+      ? this.renderAllTasks(tasks)
+      : this.renderOneTask(tasks, currentTask)
   }
 }
 

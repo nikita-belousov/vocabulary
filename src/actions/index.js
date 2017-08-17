@@ -57,3 +57,9 @@ export function resetTestState() {
     type: 'RESET_TEST_STATE'
   }
 }
+
+export function nextTask() {
+  return {
+    type: 'NEXT_TASK'
+  }
+}

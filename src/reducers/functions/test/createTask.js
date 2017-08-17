@@ -1,15 +1,16 @@
+import { fromJS } from 'immutable'
 import shortid from 'shortid'
 
 function createTask(listId, word, options) {
   const task = {}
 
-  const { id, original, translations } = word.toJS()
+  const { id, original, translations } = word
 
   task.id = shortid.generate()
   task.listId = listId
   task.wordId = id
-  task.text = word.getIn(['translations', 0])
-  task.correct = word.get('original')
+  task.text = word.translations[0]
+  task.correct = word.original
   task.userAnswer = ''
 
   return task
