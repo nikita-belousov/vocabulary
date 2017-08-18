@@ -23,7 +23,7 @@ let AddWordsToList = class extends Component {
   }
 
   tryAddWordsToList = () => {
-    if (this.isInputGroupsValid) this.addWordsToList()
+    if (this.isInputGroupsValid()) this.addWordsToList()
   }
 
   isInputGroupsValid() {
@@ -65,7 +65,7 @@ let AddWordsToList = class extends Component {
       const { original, translations } = group.form
 
       const word = {
-        original,
+        original: utils.getStringBase(original),
         translations: utils.stringToArray(translations)
       }
 

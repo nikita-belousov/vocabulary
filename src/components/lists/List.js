@@ -38,7 +38,6 @@ class List extends Component {
     return (
       <div>
         {this.renderWords(id, words)}
-        <AddWords listId={id}/>
       </div>
     )
   }
@@ -92,14 +91,11 @@ class List extends Component {
               '(empty)'}
           </i>
 
-          {words.length > 0 && (
-            <Button
-              style={{ float: 'right' }}
-              onClick={this.toggleOpen}
-            >
-              {isOpen ? 'close' : 'open'}
-            </Button>
-          ) }
+          <AddWords listId={id}/>
+          {words.length > 0 &&
+            <Button onClick={this.toggleOpen}>
+              {isOpen ? 'Close' : 'Open'}
+            </Button>}
         </div>
 
         {isOpen && words.length > 0 &&
