@@ -1,6 +1,6 @@
 import { fromJS, toJS } from 'immutable'
 import shortid from 'shortid'
-import * as utils from './../../../utils'
+import _ from 'underscore'
 
 import {
   createTasks
@@ -8,7 +8,7 @@ import {
 
 function createTest(state, neededLists, options) {
   let tasks = createTasks(state, neededLists, options)
-  tasks = utils.shuffleArray(tasks)
+  tasks = _.shuffle(tasks)
 
   return state.set('test', fromJS({
     state: 'passing',
