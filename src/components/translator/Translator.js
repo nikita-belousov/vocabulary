@@ -140,6 +140,8 @@ let Translator = class extends Component {
       data: data
         .set('result', null)
         .set('isLoading', true)
+        .set('isAdding', false)
+        .set('isAdded', false)
     }))
 
     api.lookup(word, from, to)
@@ -147,7 +149,6 @@ let Translator = class extends Component {
         data: data
           .set('result', fromJS(res))
           .set('isLoading', false)
-          .set('isAdded', false)
       })))
   }
 
