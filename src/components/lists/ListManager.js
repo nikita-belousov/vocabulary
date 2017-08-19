@@ -23,13 +23,13 @@ let ListManager = class extends Component {
     })
   }
 
-  prepareCreatingList = () => {
+  startAddingList = () => {
     this.setState(({ data }) => ({
       data: data.set('isAdding', true)
     }))
   }
 
-  cancelCreatingList = () => {
+  stopAddingList = () => {
     this.setState(({ data }) => ({
       data: data.set('isAdding', false)
     }))
@@ -49,6 +49,7 @@ let ListManager = class extends Component {
 
   createList(options) {
     this.props.dispatch(actions.createList(options))
+    this.stopAddingList()
   }
 
   onAddListFormChange = (e) => {
@@ -72,8 +73,8 @@ let ListManager = class extends Component {
         <CreateList
           isAdding={isAdding}
           onFormChange={this.onAddListFormChange}
-          onCreate={this.prepareCreatingList}
-          onCancel={this.cancelCreatingList}
+          onCreate={this.startAddingList}
+          onCancel={this.stopAddingList}
           onConfirm={this.tryCreatingList}
         />
 
