@@ -6,23 +6,30 @@ const initialState = fromJS({
     {
       id: shortid.generate(),
       name: 'default',
-      lang: null,
-      words: [
-        {
-          id: shortid.generate(),
-          langFrom: 'en',
-          langTo: 'ru',
-          original: 'death',
-          translations: ['смерть', 'гибель', 'конец']
-        },
-        {
-          id: shortid.generate(),
-          langFrom: 'en',
-          langTo: 'ru',
-          original: 'grip',
-          translations: ['рукоятка', 'ручка', 'захват']
-        }
-      ]
+      langFrom: null,
+      langTo: null,
+      words: []
+    },
+    {
+      id: shortid.generate(),
+      name: 'french words',
+      langFrom: 'fr',
+      langTo: null,
+      words: []
+    },
+    {
+      id: shortid.generate(),
+      name: 'english words',
+      langFrom: 'en',
+      langTo: null,
+      words: []
+    },
+    {
+      id: shortid.generate(),
+      name: 'en - fr',
+      langFrom: 'en',
+      langTo: 'fr',
+      words: []
     }
   ],
   test: {

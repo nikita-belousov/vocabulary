@@ -55,9 +55,17 @@ class CreateList extends Component {
             />
 
             <Select
-              name="lang"
+              name="langFrom"
               options={langOptions}
               onChange={onFormChange}
+              placeholder="Select from"
+            />
+
+            <Select
+              name="langTo"
+              options={langOptions}
+              onChange={onFormChange}
+              placeholder="Select to"
             />
 
             <Button onClick={onConfirm}>

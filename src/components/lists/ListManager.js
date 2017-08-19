@@ -16,7 +16,8 @@ let ListManager = class extends Component {
       addForm: {
         name: '',
         description: '',
-        lang: ''
+        langFrom: '',
+        langTo: ''
       },
       isAdding: false,
     })
@@ -46,27 +47,16 @@ let ListManager = class extends Component {
     return utils.getStringBase(addForm.name) !== ''
   }
 
-  createList({ name, description, lang }) {
-    this.props.dispatch(
-      actions.createList({
-        name,
-        description,
-        lang
-      })
-    )
+  createList(options) {
+    this.props.dispatch(actions.createList(options))
   }
 
   onAddListFormChange = (e) => {
     const { name, value } = e.target
 
-    this.setState(prevState => {
-      return {
-        data: prevState.data.setIn(
-          ['addForm', name],
-          value
-        )
-      }
-    })
+    this.setState(({ data }) => ({
+        data: data.setIn(['addForm', name], value)
+    }))
   }
 
   render() {

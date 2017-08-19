@@ -173,6 +173,8 @@ let Translator = class extends Component {
               listValue={data.getIn(['addForm', 'list', 'id'])}
               onChange={this.onAddFormChange}
               avaibleLists={avaibleLists.toJS()}
+              langFrom={data.getIn(['translationForm', 'langFrom'])}
+              langTo={data.getIn(['translationForm', 'langTo'])}
             />}
       </div>
     )

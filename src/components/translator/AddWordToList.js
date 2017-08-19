@@ -8,25 +8,34 @@ import {
 } from './../commonComponents'
 
 class AddWordToList extends Component {
-  avaibleListsToOptions(lists) {
-    return lists.reduce((res, list) => {
-      res.push({
-        value: list.id,
-        name: list.name
-      })
+  avaibleListsToOptions(lists, from, to) {
+    return lists
+      .filter(list => {
+        const { langFrom, langTo } = list
 
-      return res
-    }, [])
+        return (!langFrom || langFrom === from)
+          && (!langTo || langTo === to)
+      })
+      .reduce((res, list) => {
+        res.push({
+          value: list.id,
+          name: list.name
+        })
+
+        return res
+      }, [])
   }
 
   renderListSelect() {
     const {
       listValue,
       onChange,
-      avaibleLists
+      avaibleLists,
+      langFrom,
+      langTo
     } = this.props;
 
-    const options = this.avaibleListsToOptions(avaibleLists)
+    const options = this.avaibleListsToOptions(avaibleLists, langFrom, langTo)
 
     return (
       <Select

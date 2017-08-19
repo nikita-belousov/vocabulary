@@ -2,13 +2,14 @@ import { fromJS } from 'immutable'
 import shortid from 'shortid'
 
 function createList(state, options) {
-  const { name, description, lang } = options
+  const { name, description, langFrom, langTo } = options
 
   const newList = {
     id: shortid.generate(),
     name,
-    description: description || '',
-    lang: lang || '',
+    description: description || null,
+    langFrom: langFrom || null,
+    langTo: langTo || null,
     words: []
   }
 
