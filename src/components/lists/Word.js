@@ -10,6 +10,8 @@ import {
   TextInput
 } from './../commonComponents'
 
+import styles from './../../styles/components/Word.css'
+
 let Word = class extends Component {
   state = {
     data: fromJS({
@@ -19,6 +21,10 @@ let Word = class extends Component {
         translations: this.props.translations.join(', ')
       }
     })
+  }
+
+  componentReceivesProps(props) {
+    console.log(1)
   }
 
   editWord = () => {
@@ -124,7 +130,7 @@ let Word = class extends Component {
     )
 
     return (
-      <div style={{ margin: '1em 0' }}>
+      <div className={styles.word}>
         {isEditing ? this.renderEditingWord(original, translationsString)
           : this.renderWord(original, translationsString)}
       </div>

@@ -7,8 +7,10 @@ import * as actions from './../../actions'
 
 import {
   CreateList,
-  List
+  ListLabel
 } from './../listsComponents'
+
+import styles from './../../styles/components/ListManager.css'
 
 let ListManager = class extends Component {
   state = {
@@ -62,23 +64,19 @@ let ListManager = class extends Component {
 
   render() {
     const { lists } = this.props
-    const state = this.state.data.toJS()
-
-    const { openedList, isAdding } = state
+    const state = this.state.data
 
     return (
-      <div style={{
-        marginTop: '2em'
-      }}>
-        <CreateList
+      <div>
+        {/* <CreateList
           isAdding={isAdding}
           onFormChange={this.onAddListFormChange}
           onCreate={this.startAddingList}
           onCancel={this.stopAddingList}
           onConfirm={this.tryCreatingList}
-        />
+        /> */}
 
-        {lists.map(list => (
+        {/* {lists.map(list => (
           <List
             key={list.id}
             id={list.id}
@@ -87,16 +85,20 @@ let ListManager = class extends Component {
             lang={list.lang}
             words={list.words}
           />
+        ))} */}
+
+        {lists.map(list => (
+          <ListLabel
+            key={list.get('id')}
+            list={list}
+          />
         ))}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  const lists = state.get('lists').toJS()
-  return { lists }
-}
+const mapStateToProps = (state) => ({ lists: state.get('lists') })
 
 ListManager = connect(
     mapStateToProps,

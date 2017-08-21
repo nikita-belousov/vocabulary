@@ -1,33 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import './../styles/libs/font-awesome.css'
+import './../styles/libs/normalize.css'
+
+import styles from './../styles/components/App.css'
+
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
 
+import {
+  Container,
+  Header,
+  Sidebar,
+  Content,
+  Inner
+} from './layoutComponents'
+
 import { Translator } from './translatorComponents'
-import { ListManager } from './listsComponents'
+import { ListManager, ListContent } from './listsComponents'
 import { TestManager } from './testComponents'
 
-const App = () => (
-    <Router>
-      <div style={{
-        width: '600px',
-        margin: 'auto'
-      }}>
-        <ul>
-          <li><Link to="/translator">Translator</Link></li>
-          <li><Link to="/lists">My lists</Link></li>
-          <li><Link to="/test">Test</Link></li>
-        </ul>
 
-        <Route path="/translator" component={Translator}/>
-        <Route path="/lists" component={ListManager}/>
-        <Route path="/test" component={TestManager}/>
-      </div>
-    </Router>
+const App = () => (
+  <Router>
+    <div className={styles.app}>
+      <Header />
+      <Container>
+        <Inner>
+          <Sidebar>
+            <ListManager/>
+          </Sidebar>
+          <Content>
+            <Route path="/list/:listId" component={ListContent} />
+          </Content>
+        </Inner>
+      </Container>
+    </div>
+  </Router>
 )
 
 export default App

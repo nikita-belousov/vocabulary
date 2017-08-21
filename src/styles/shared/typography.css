@@ -1,0 +1,15 @@
+.normal {
+  font-size: 14px;
+}
+
+.small {
+  font-size: 13px;
+}
+
+.extra-small {
+  font-size: 9px;
+}
+
+.font-family {
+  font-family: 'Open Sans', Heletica, sans-serif;
+}

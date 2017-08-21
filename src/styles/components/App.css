@@ -1,0 +1,3 @@
+.app {
+  composes: font-family normal from '../shared/typography.css';
+}

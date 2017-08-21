@@ -48,7 +48,7 @@ class List extends Component {
         <br/>
         {words.map(word => (
           <Word
-            key={shortid.generate()}
+            key={word.id}
             listId={listId}
             id={word.id}
             original={word.original}
@@ -74,14 +74,7 @@ class List extends Component {
     const learntWords = this.countLearntWords(words)
 
     return (
-      <div
-        style={{
-          cursor: isOpen ? 'default' : 'pointer',
-          padding: '.8em',
-          margin: '.6em',
-          border: '1px solid black'
-        }}
-      >
+      <div>
         <div>
           <b>{name}</b>
           {' '}
@@ -91,11 +84,11 @@ class List extends Component {
               '(empty)'}
           </i>
 
-          <AddWords listId={id}/>
+          {/* <AddWords listId={id}/>
           {words.length > 0 &&
             <Button onClick={this.toggleOpen}>
               {isOpen ? 'Close' : 'Open'}
-            </Button>}
+            </Button>} */}
         </div>
 
         {isOpen && words.length > 0 &&

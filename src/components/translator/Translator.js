@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as actions from './../../actions'
 import * as api from './../../utils/dictionaryAPI'
 import shortid from 'shortid'
+import styles from './../../styles/components/Translator.css'
 
 import {
   Loading
@@ -183,14 +184,13 @@ let Translator = class extends Component {
 
   render() {
     const { data } = this.state
+    const isLoading = data.get('isLoading')
 
     let result = data.get('result')
     result = result && result.toJS()
 
-    const isLoading = data.get('isLoading')
-
     return (
-      <div>
+      <div className={`${styles.translator}`}>
         <TranslationForm
           onTranslate={this.translate}
           onChange={this.onTranslationFormChange}

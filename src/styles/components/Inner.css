@@ -1,0 +1,4 @@
+.inner {
+  display: flex;
+  height: calc(100vh - 43px);
+}

@@ -1,0 +1,5 @@
+.header {
+  composes: primary-black from '../shared/colors.css';
+  composes: small from '../shared/typography.css';
+  composes: header-height from '../shared/layout.css';
+}
