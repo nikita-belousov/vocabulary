@@ -1,0 +1,54 @@
+@value colors: '../../styles/shared/vars/colors.css';
+@value light-text from colors;
+
+.button {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button::before {
+  content: '\f142';
+  font-family: FontAwesome;
+  font-size: 1.2em;
+}
+
+.menu-wrapper {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: .6em;
+  z-index: 1000;
+  background: #fff;
+  width: 14em;
+  border: 1px solid light-text;
+  border-radius: 3px;
+}
+
+.menu--right {
+  composes: menu;
+}
+
+.menu--right {
+  composes: menu;
+  left: 0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action {
+  padding: .8em 1em;
+  cursor: pointer;
+}
+
+.action:hover {
+  background: #f1f1f1;
+}

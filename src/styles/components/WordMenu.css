@@ -1,0 +1,19 @@
+.button {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button::before {
+  content: '\f142';
+  font-family: FontAwesome;
+  font-size: 1.2em;
+}
+
+.menu-wrapper {
+  position: absolute;
+  top: 1.8em;
+  right: 0;
+}

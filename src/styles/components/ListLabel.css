@@ -1,28 +1,24 @@
+@value typography: '../shared/vars/typography.css';
+@value small, extra-small from typography;
+
+@value colors: '../shared/vars/colors.css';
+@value content-background, light-text from colors;
+
+.link:hover {
+  text-decoration: none;
+}
+
 .list-label {
   padding: .6em;
-  position: relative;
 }
 
 .list-label:hover {
-  background: #fff;
-}
-
-.list-label:hover .settings-button {
-  display: block;
+  background: content-background;
 }
 
 .words-amount {
-  font-size: .7em;
-  color: grey;
+  font-size: extra-small;
+  color: light-text;
   position: relative;
-  left: .4em;
-}
-
-.settings-button {
-  width: 1em;
-  height: 1em;
-  font-size: 1em;
-  line-height: 1em;
-  position: absolute;
-  right: 0;
+  left: .6em;
 }

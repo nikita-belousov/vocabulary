@@ -1,0 +1,16 @@
+@value colors: '../shared/vars/colors.css';
+@value border-color from colors;
+
+.coupled {
+  display: flex;
+}
+
+.coupled input:nth-child(1) {
+  width: 100px;
+  border-right: 0;
+}
+
+.coupled input:nth-child(2) {
+  flex-grow: 1;
+  border-left-color: border-color;
+}

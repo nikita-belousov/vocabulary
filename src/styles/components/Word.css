@@ -1,5 +1,34 @@
+@value colors: '../shared/vars/colors.css';
+@value border-color from colors;
+
+@value sizes: '../shared/vars/sizes.css';
+@value margin-bottom from sizes;
+
 .word {
-  padding: .8em 0;
-  border-top: 1px solid #f1f1f1;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid border-color;
+}
+
+.inner {
+  margin-right: -1.5em;
+  padding-right: 1.5em;
+  height: 3em;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.original {
+  padding: 0 2em 0 .6em;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.menu-wrapper {
+  position: absolute;
+  right: 0;
+}
+
+.editing-form-wrapper {
+  margin-bottom: margin-bottom;
 }

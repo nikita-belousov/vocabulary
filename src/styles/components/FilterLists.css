@@ -1,0 +1,16 @@
+@value typography: '../shared/vars/typography.css';
+@value small from typography;
+
+@value colors: '../shared/vars/colors.css';
+@value light-text from colors;
+
+.wrapper {
+  padding-right: 4em;
+}
+
+.label {
+  color: light-text;
+  font-size: small;
+  font-style: italic;
+  margin-bottom: .2em;
+}

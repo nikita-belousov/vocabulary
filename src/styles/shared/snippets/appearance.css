@@ -1,0 +1,14 @@
+@value colors: '../vars/colors.css';
+@value lighter-text from colors;
+
+@value sizes: '../vars/sizes.css';
+@value margin-bottom from sizes;
+
+.text-input-area {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: margin-bottom;
+  padding: .6em;
+  border: 1px solid lighter-text;
+  outline: 0;
+}

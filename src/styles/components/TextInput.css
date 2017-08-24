@@ -1,0 +1,9 @@
+.regular {
+  composes: text-input-area from '../shared/snippets/appearance.css';
+}
+
+.tiny {
+  composes: regular;
+  padding: .2em 1em;
+  border-radius: 100vh;
+}

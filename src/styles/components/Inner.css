@@ -1,4 +1,7 @@
+@value sizes: '../shared/vars/sizes.css';
+@value header-height from sizes;
+
 .inner {
   display: flex;
-  height: calc(100vh - 43px);
+  height: calc(100vh - header-height);
 }

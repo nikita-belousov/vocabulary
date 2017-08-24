@@ -1,0 +1,40 @@
+.not-learnt {
+  width: 1.2em;
+  height: 1.2em;
+  position: relative;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.half-learnt {
+  composes: not-learnt;
+}
+
+.half-learnt:after {
+  display: block;
+  box-sizing: border-box;
+  content: '';
+  width: 50%;
+  height: 100%;
+  border: 3px solid #5ac9e8;
+  border-top-right-radius: .6em;
+  border-bottom-right-radius: .6em;
+  border-left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.learnt {
+  composes: not-learnt;
+}
+
+.learnt:after {
+  display: block;
+  box-sizing: border-box;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: 3px solid #5ac9e8;
+  border-radius: 50%;
+}

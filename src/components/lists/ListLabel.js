@@ -2,23 +2,25 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './../../styles/components/ListLabel.css'
 
+import {
+  ActionsMenu
+} from './../commonComponents'
+
 class ListLabel extends Component {
   countLearntWords(list) {
     return list.get('words')
-      .filter(word => word.get('isLearnt'))
+      .filter(word => word.get('learningState') === 'learnt')
       .size
   }
 
   render() {
-    const { list } = this.props
-
+    const { list, listActions } = this.props
     const learntWords = this.countLearntWords(list)
 
     return (
       <NavLink
+        className={styles.link}
         to={`/list/${list.get('id')}`}
-        style={{ textDecoration: 'none', color: 'inherit' }}
-        activeStyle={{ fontWeight: 'bold' }}
       >
         <div className={styles['list-label']}>
           <span className={styles['name']}>
@@ -29,7 +31,9 @@ class ListLabel extends Component {
             {learntWords}/{list.get('words').size}
           </span>
 
-          <i className={styles['settings-button']} />
+          <ActionsMenu
+            actions={listActions}
+          />
         </div>
       </NavLink>
     )

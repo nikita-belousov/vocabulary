@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import './../styles/libs/font-awesome.css'
 import './../styles/libs/normalize.css'
+import './../styles/global.css'
 
 import styles from './../styles/components/App.css'
 
@@ -20,9 +21,18 @@ import {
   Inner
 } from './layoutComponents'
 
-import { Translator } from './translatorComponents'
-import { ListManager, ListContent } from './listsComponents'
-import { TestManager } from './testComponents'
+import {
+  Translator
+} from './translatorComponents'
+
+import {
+  ListsManager,
+  ListContent
+} from './listsComponents'
+
+import {
+  TestManager
+} from './testComponents'
 
 
 const App = () => (
@@ -32,7 +42,7 @@ const App = () => (
       <Container>
         <Inner>
           <Sidebar>
-            <ListManager/>
+            <ListsManager/>
           </Sidebar>
           <Content>
             <Route path="/list/:listId" component={ListContent} />

@@ -5,16 +5,23 @@ import { connect } from 'react-redux'
 import * as utils from './../../utils'
 import * as actions from './../../actions'
 
+import styles from '../../styles/components/Word.css'
+
 import {
   Button,
-  TextInput
+  TextInput,
+  WordLearningState,
+  ActionsMenu
 } from './../commonComponents'
 
-import styles from './../../styles/components/Word.css'
+import {
+  WordForm
+} from './../listsComponents'
 
 let Word = class extends Component {
   state = {
     data: fromJS({
+      isHovered: false,
       isEditing: false,
       editingForm: {
         original: this.props.original,
@@ -23,23 +30,67 @@ let Word = class extends Component {
     })
   }
 
-  componentReceivesProps(props) {
-    console.log(1)
+  componentDidMount() {
+    this.wordNode.addEventListener('mouseenter', this.handleMouseover)
+    this.wordNode.addEventListener('mouseleave', this.handleMouseout)
   }
 
-  editWord = () => {
+  componentWillUnmount() {
+    document.removeEventListener('mouseenter', this.handleMouseover)
+    document.removeEventListener('mouseleave', this.handleMouseout)
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState(({ data }) => ({
+      data: data.update('editingForm', form =>
+        form
+          .set('original', newProps.original)
+          .set('translations', newProps.translations.join(', '))
+      )
+    }))
+  }
+
+  handleMouseover = () => {
+    this.setState(({ data }) => ({
+      data: data.update('isHovered', value => true)
+    }))
+  }
+
+  handleMouseout = () => {
+    this.setState(({ data }) => ({
+      data: data.update('isHovered', value => false)
+    }))
+  }
+
+
+  edit = () => {
     this.setState(({ data }) => ({
       data: data.set('isEditing', true)
+    }))
+  }
+
+  cancelEditing = () => {
+    this.setState(({ data }) => ({
+      data: data.set('isEditing', false)
+    }))
+
+    this.resetEditingData()
+  }
+
+  resetEditingData() {
+    this.setState(({ data }) => ({
+      data: data.set('editingForm', fromJS({
+        original: this.props.original,
+        translations: this.props.translations.join(', ')
+      }))
     }))
   }
 
   saveEditedWord = () => {
     const { listId, id } = this.props
 
-    const newInfo = this.state.data
-      .get('editingForm')
-      .toJS()
-
+    const newInfo =
+      this.state.data.get('editingForm').toJS()
     newInfo.translations = utils.stringToArray(newInfo.translations)
 
     this.props.dispatch(
@@ -51,60 +102,11 @@ let Word = class extends Component {
     }))
   }
 
-  removeWordFromList = () => {
+  delete = () => {
     const { listId, id } = this.props
 
     this.props.dispatch(
       actions.removeWordFromList(listId, id)
-    )
-  }
-
-  renderWord(original, translations) {
-    const { isLearnt } = this.props
-
-    return (
-      <div>
-        <b style={{ color: isLearnt ? 'green' : 'inherit' }}>
-          {original}
-        </b>
-        {' — '}
-        <span>{translations}</span>
-        {' '}
-        <Button onClick={this.editWord}>
-          Edit
-        </Button>
-        {' '}
-        <Button onClick={this.removeWordFromList}>
-          Delete
-        </Button>
-      </div>
-    )
-  }
-
-  renderEditingWord() {
-    const {
-      original,
-      translations
-    } = this.state.data.get('editingForm').toJS()
-
-    return (
-      <div>
-        <TextInput
-          name="original"
-          value={original}
-          onChange={this.onEditingFormChange}
-        />
-        {' -- '}
-        <TextInput
-          name="translations"
-          value={translations}
-          onChange={this.onEditingFormChange}
-        />
-        {' '}
-        <Button onClick={this.saveEditedWord}>
-          Save
-        </Button>
-      </div>
     )
   }
 
@@ -116,6 +118,63 @@ let Word = class extends Component {
     }))
   }
 
+  renderWord(original, translations) {
+    const { learningState } = this.props
+    const isHovered = this.state.data.get('isHovered')
+    const isEditing = this.state.data.get('isEditing')
+
+    const menuActions = [
+      { name: 'Edit word', handler: this.edit },
+      { name: 'Delete word', handler: this.delete }
+    ]
+
+    return (
+      <div
+        ref={node => this.wordNode = node}
+        className={styles.inner}
+      >
+        <WordLearningState state={learningState} />
+
+        <span className={styles.original}>
+          {original}
+        </span>
+
+        <span className={styles.translations}>
+          {translations}
+        </span>
+
+        {(isHovered || isEditing) &&
+          <div className={styles['menu-wrapper']}>
+            <ActionsMenu
+              actions={menuActions}
+              align="right"
+            />
+          </div>}
+      </div>
+    )
+  }
+
+  renderEditingForm() {
+    const {
+      original,
+      translations
+    } = this.state.data.get('editingForm').toJS()
+
+    return (
+      <div className={styles['editing-form-wrapper']}>
+        <WordForm
+          original={original}
+          translations={translations}
+          onChange={this.onEditingFormChange}
+          onCancel={this.cancelEditing}
+          onSubmit={this.saveEditedWord}
+        >
+          Save
+        </WordForm>
+      </div>
+    )
+  }
+
   render() {
     const {
       original,
@@ -124,14 +183,11 @@ let Word = class extends Component {
     } = this.props
 
     const isEditing = this.state.data.get('isEditing')
-
-    const translationsString = translations.map((tr, index) =>
-      index === translations.length - 1 ? tr : tr + ', '
-    )
+    const translationsString = translations.join(', ')
 
     return (
       <div className={styles.word}>
-        {isEditing ? this.renderEditingWord(original, translationsString)
+        {isEditing ? this.renderEditingForm(original, translationsString)
           : this.renderWord(original, translationsString)}
       </div>
     )

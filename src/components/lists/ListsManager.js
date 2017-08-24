@@ -6,15 +6,19 @@ import * as utils from './../../utils'
 import * as actions from './../../actions'
 
 import {
-  CreateList,
-  ListLabel
+  ListLabel,
+  AddList,
+  FilterLists
 } from './../listsComponents'
 
-import styles from './../../styles/components/ListManager.css'
+import styles from '../../styles/components/ListsManager.css'
 
-let ListManager = class extends Component {
+let ListsManager = class extends Component {
   state = {
     data: fromJS({
+      filterForm: {
+        name: ''
+      },
       addForm: {
         name: '',
         description: '',
@@ -58,41 +62,59 @@ let ListManager = class extends Component {
     const { name, value } = e.target
 
     this.setState(({ data }) => ({
-        data: data.setIn(['addForm', name], value)
+      data: data.setIn(['addForm', name], value)
     }))
+  }
+
+  onFilterFormChange = (e) => {
+    const { name, value } = e.target
+
+    this.setState(({ data }) => ({
+      data: data.setIn(['filterForm', name], value)
+    }))
+  }
+
+  getFilteredLists() {
+    const filterName = this.state.data
+      .getIn(['filterForm', 'name'])
+
+    return this.props.lists.filter(list =>
+      list.get('name')
+        .toLowerCase()
+        .includes(
+          utils.getStringBase(filterName)
+        )
+    )
   }
 
   render() {
     const { lists } = this.props
     const state = this.state.data
+    const filteredLists = this.getFilteredLists(lists)
+
+    const listActions = [
+      { name: 'Edit list', handle: this.edit },
+      { name: 'Delete list', handle: this.delete }
+    ]
 
     return (
       <div>
-        {/* <CreateList
-          isAdding={isAdding}
-          onFormChange={this.onAddListFormChange}
-          onCreate={this.startAddingList}
-          onCancel={this.stopAddingList}
-          onConfirm={this.tryCreatingList}
-        /> */}
+        <FilterLists
+          name={state.getIn(['filterForm', 'name'])}
+          onChange={this.onFilterFormChange}
+        />
 
-        {/* {lists.map(list => (
-          <List
-            key={list.id}
-            id={list.id}
-            name={list.name}
-            description={list.description}
-            lang={list.lang}
-            words={list.words}
-          />
-        ))} */}
-
-        {lists.map(list => (
+        {filteredLists.map(list => (
           <ListLabel
             key={list.get('id')}
             list={list}
+            listActions={listActions}
           />
         ))}
+
+        <div className={styles['add-wrapper']}>
+          <AddList />
+        </div>
       </div>
     )
   }
@@ -100,9 +122,9 @@ let ListManager = class extends Component {
 
 const mapStateToProps = (state) => ({ lists: state.get('lists') })
 
-ListManager = connect(
+ListsManager = connect(
     mapStateToProps,
     null
-)(ListManager)
+)(ListsManager)
 
-export default ListManager
+export default ListsManager

@@ -4,7 +4,7 @@ import shortid from 'shortid';
 const initialState = fromJS({
   lists: [
     {
-      id: shortid.generate(),
+      id: 'HJYwUROd-',
       name: 'default',
       langFrom: null,
       langTo: null,
@@ -12,31 +12,16 @@ const initialState = fromJS({
         {
           id: shortid.generate(),
           original: 'cuckoo',
-          isLearnt: false,
+          learningState: 'halfLearnt',
           translations: ['кукушка']
+        },
+        {
+          id: shortid.generate(),
+          original: 'something',
+          learningState: 'learnt',
+          translations: ['один', 'два', 'три']
         }
       ]
-    },
-    {
-      id: shortid.generate(),
-      name: 'french words',
-      langFrom: 'fr',
-      langTo: null,
-      words: []
-    },
-    {
-      id: shortid.generate(),
-      name: 'english words',
-      langFrom: 'en',
-      langTo: null,
-      words: []
-    },
-    {
-      id: shortid.generate(),
-      name: 'en - fr',
-      langFrom: 'en',
-      langTo: 'fr',
-      words: []
     }
   ],
   test: {

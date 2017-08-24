@@ -1,0 +1,15 @@
+.level-1 {
+  composes: head-1 from '../shared/snippets/typography.css';
+}
+
+.level-2 {
+  composes: head-2 from '../shared/snippets/typography.css';
+}
+
+.level-3 {
+  composes: head-3 from '../shared/snippets/typography.css';
+}
+
+.level-4 {
+  composes: head-4 from '../shared/snippets/typography.css';
+}

@@ -5,7 +5,7 @@ function addWordToList(state, listId, word) {
   const newWord = {
     ...word.toJS(),
     id: shortid.generate(),
-    isLearnt: false
+    learningState: 'notLearnt'
   }
 
   return state.map(list => {

@@ -5,7 +5,7 @@ export function capitalize(word) {
 export function stringToArray(string) {
   return string
     .split(',')
-    .filter(word => word !== '')
+    .filter(word => getStringBase(word) !== '')
     .map(word => getStringBase(word))
 }
 

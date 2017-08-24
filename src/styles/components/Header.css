@@ -1,5 +1,14 @@
+@value typography: '../shared/vars/typography.css';
+@value small from typography;
+
+@value colors: '../shared/vars/colors.css';
+@value primary-black from colors;
+
+@value sizes: '../shared/vars/sizes.css';
+@value header-height from sizes;
+
 .header {
-  composes: primary-black from '../shared/colors.css';
-  composes: small from '../shared/typography.css';
-  composes: header-height from '../shared/layout.css';
+  font-size: small;
+  height: header-height;
+  background: primary-black;
 }

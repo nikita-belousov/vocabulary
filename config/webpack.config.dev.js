@@ -2,7 +2,7 @@
 
 var autoprefixer = require('autoprefixer');
 var lost = require('lost');
-var precss = require('precss');
+var moduleValues = require('postcss-modules-values');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -10,8 +10,6 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
-
-
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -172,7 +170,7 @@ module.exports = {
       lost({
         gutter: '0px'
       }),
-      precss()
+      moduleValuess
     ];
   },
   plugins: [

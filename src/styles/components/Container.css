@@ -1,3 +1,6 @@
+@value sizes: '../shared/vars/sizes.css';
+@value container-width from sizes;
+
 .container {
-  composes: container-width from '../shared/layout.css';
+  lost-center: container-width;
 }

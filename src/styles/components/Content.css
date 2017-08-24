@@ -1,7 +1,10 @@
+@value colors: '../shared/vars/colors.css';
+@value content-background, border-color from colors;
+
 .content {
   lost-column: 3/4;
-  background: #fff;
-  border-left: 1px solid #f1f1f1;
-  border-right: 1px solid #f1f1f1;
   padding: 2em;
+  background: content-background;
+  border-left: 1px solid border-color;
+  border-right: 1px solid border-color;
 }

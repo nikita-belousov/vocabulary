@@ -1,3 +1,11 @@
+@value colors: '../shared/vars/colors.css';
+@value page-background from colors;
+
+@value typography: '../shared/vars/typography.css';
+@value family, normal from typography;
+
 .app {
-  composes: font-family normal from '../shared/typography.css';
+  font-family: family;
+  font-size: normal;
+  background: page-background;
 }

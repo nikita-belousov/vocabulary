@@ -1,0 +1,25 @@
+@value colors: '../styles/shared/vars/colors.css';
+@value light-text from colors;
+
+:global(a) {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+:global(a:hover) {
+  text-decoration: underline;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: light-text;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: light-text;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: light-text;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: light-text;
+}

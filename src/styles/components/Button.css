@@ -1,0 +1,35 @@
+@value colors: '../shared/vars/colors.css';
+@value primary-black from colors;
+
+.button-regular {
+  padding: .6em 1em;
+  border: 0;
+  border-radius: 3px;
+  outline: 0;
+  background: primary-black;
+  cursor: pointer;
+  color: #fff;
+}
+
+.button-link {
+  composes: button-regular;
+
+  color: inherit;
+  border: 0;
+  background: transparent;
+}
+
+.button-link:hover {
+  text-decoration: underline;
+}
+
+.button-add {
+  composes: button-link;
+}
+
+.button-add::before {
+  display: inline-block;
+  padding-right: .6em;
+  font-family: FontAwesome;
+  content: '\f067';
+}

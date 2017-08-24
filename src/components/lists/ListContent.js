@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fromJS } from 'immutable'
+
+import styles from '../../styles/components/ListContent.css'
 
 import {
-  Word
+  Head,
+  AddLink,
+  TextInput,
+  Button
+} from './../commonComponents'
+
+import {
+  Word,
+  AddWordToList
 } from './../listsComponents'
 
 let ListContent = class extends Component {
@@ -12,9 +23,11 @@ let ListContent = class extends Component {
 
     const activeList = lists.find(list => list.get('id') === listId)
 
-    return activeList ?
+    return activeList ? (
       <div>
-        <h2>{activeList.get('name')}</h2>
+        <Head level="2">
+          {activeList.get('name')}
+        </Head>
 
         {activeList.get('words').map(word => (
           <Word
@@ -23,12 +36,13 @@ let ListContent = class extends Component {
             id={word.get('id')}
             original={word.get('original')}
             translations={word.get('translations')}
-            isLearnt={word.get('isLearnt')}
+            learningState={word.get('learningState')}
           />
         ))}
+
+        <AddWordToList listId={listId} />
       </div>
-      :
-      null
+    ) : null
   }
 }
 
