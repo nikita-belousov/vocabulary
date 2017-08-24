@@ -8,6 +8,10 @@ import * as actions from './../../actions'
 import styles from '../../styles/components/Word.css'
 
 import {
+  WithHover
+} from './../HOCs'
+
+import {
   Button,
   TextInput,
   WordLearningState,
@@ -21,23 +25,12 @@ import {
 let Word = class extends Component {
   state = {
     data: fromJS({
-      isHovered: false,
       isEditing: false,
       editingForm: {
         original: this.props.original,
         translations: this.props.translations.join(', ')
       }
     })
-  }
-
-  componentDidMount() {
-    this.wordNode.addEventListener('mouseenter', this.handleMouseover)
-    this.wordNode.addEventListener('mouseleave', this.handleMouseout)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mouseenter', this.handleMouseover)
-    document.removeEventListener('mouseleave', this.handleMouseout)
   }
 
   componentWillReceiveProps(newProps) {
@@ -49,19 +42,6 @@ let Word = class extends Component {
       )
     }))
   }
-
-  handleMouseover = () => {
-    this.setState(({ data }) => ({
-      data: data.update('isHovered', value => true)
-    }))
-  }
-
-  handleMouseout = () => {
-    this.setState(({ data }) => ({
-      data: data.update('isHovered', value => false)
-    }))
-  }
-
 
   edit = () => {
     this.setState(({ data }) => ({
@@ -119,9 +99,7 @@ let Word = class extends Component {
   }
 
   renderWord(original, translations) {
-    const { learningState } = this.props
-    const isHovered = this.state.data.get('isHovered')
-    const isEditing = this.state.data.get('isEditing')
+    const { isHovered, learningState } = this.props
 
     const menuActions = [
       { name: 'Edit word', handler: this.edit },
@@ -130,7 +108,7 @@ let Word = class extends Component {
 
     return (
       <div
-        ref={node => this.wordNode = node}
+        ref={node => this.wrapper = node}
         className={styles.inner}
       >
         <WordLearningState state={learningState} />
@@ -143,13 +121,13 @@ let Word = class extends Component {
           {translations}
         </span>
 
-        {(isHovered || isEditing) &&
-          <div className={styles['menu-wrapper']}>
-            <ActionsMenu
-              actions={menuActions}
-              align="right"
-            />
-          </div>}
+        <div className={styles['menu-wrapper']}>
+          <ActionsMenu
+            isHovered={isHovered}
+            actions={menuActions}
+            align="right"
+          />
+        </div>
       </div>
     )
   }
@@ -195,5 +173,6 @@ let Word = class extends Component {
 }
 
 Word = connect()(Word)
+Word = WithHover(Word)
 
 export default Word

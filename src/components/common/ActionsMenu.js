@@ -10,12 +10,23 @@ class ActionsMenu extends Component {
   }
 
   componentDidMount() {
-    this.clickListener = document
-      .addEventListener('click', this.handleDocumentClick)
+    document.addEventListener('click', this.handleDocumentClick)
   }
 
   componentWillUnmount() {
     document.removeEventListener('click', this.handleDocumentClick)
+  }
+
+  handleMouseenter = () => {
+    this.setState(({ data }) => ({
+      data: data.update('isShown', value => true)
+    }))
+  }
+
+  handleMouseleave = () => {
+    this.setState(({ data }) => ({
+      data: data.update('isShown', value => false)
+    }))
   }
 
   handleDocumentClick = () => {
@@ -33,7 +44,7 @@ class ActionsMenu extends Component {
     }))
   }
 
-  render() {
+  renderVisible() {
     const isActive = this.state.data.get('isActive')
     const { actions, align } = this.props
 
@@ -68,6 +79,15 @@ class ActionsMenu extends Component {
           </div>}
       </div>
     )
+  }
+
+  render() {
+    const { isHovered } = this.props
+    const isActive = this.state.data.get('isActive')
+
+    return isHovered || isActive
+      ? this.renderVisible()
+      : null
   }
 }
 

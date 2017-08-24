@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { fromJS } from 'immutable'
 import { NavLink } from 'react-router-dom'
 import styles from './../../styles/components/ListLabel.css'
 
@@ -7,6 +8,12 @@ import {
 } from './../commonComponents'
 
 class ListLabel extends Component {
+  state = {
+    data: fromJS({
+      isHovered: false
+    })
+  }
+
   countLearntWords(list) {
     return list.get('words')
       .filter(word => word.get('learningState') === 'learnt')
@@ -15,6 +22,7 @@ class ListLabel extends Component {
 
   render() {
     const { list, listActions } = this.props
+    const isHovered = this.state.data.get('isHovered')
     const learntWords = this.countLearntWords(list)
 
     return (
@@ -32,6 +40,7 @@ class ListLabel extends Component {
           </span>
 
           <ActionsMenu
+            isHovered={isHovered}
             actions={listActions}
           />
         </div>

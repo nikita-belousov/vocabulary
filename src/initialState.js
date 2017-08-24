@@ -8,20 +8,7 @@ const initialState = fromJS({
       name: 'default',
       langFrom: null,
       langTo: null,
-      words: [
-        {
-          id: shortid.generate(),
-          original: 'cuckoo',
-          learningState: 'halfLearnt',
-          translations: ['кукушка']
-        },
-        {
-          id: shortid.generate(),
-          original: 'something',
-          learningState: 'learnt',
-          translations: ['один', 'два', 'три']
-        }
-      ]
+      words: []
     }
   ],
   test: {
